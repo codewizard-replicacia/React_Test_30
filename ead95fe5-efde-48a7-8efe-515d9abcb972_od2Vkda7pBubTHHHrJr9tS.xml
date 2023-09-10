@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+    <edmx:DataServices>
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Model">
+            <EntityType HasStream="false" Name="Visit">
+                <Key>
+                    <PropertyRef Name="Visit_id"/>
+                </Key>
+                <Property Name="Visit_id" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="VetName" Type="Edm.String" isUnique="false"/>
+                <Property Name="Prescription" Type="Edm.String" isUnique="false"/>
+                <Property Name="Observations" Type="Edm.String" isUnique="false"/>
+                <Property Name="Pet_id" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="PetName" Type="Edm.String" isUnique="false"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="Pet">
+                <Key>
+                    <PropertyRef Name="Pet_id"/>
+                </Key>
+                <Property Name="Pet_id" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="PetName" Type="Edm.String" isUnique="false"/>
+                <Property Name="PetCategory" Type="Edm.String" isUnique="false"/>
+                <Property Name="PetAge" Type="Edm.String" isUnique="false"/>
+                <Property Name="PetGender" Type="Edm.String" isUnique="false"/>
+                <Property Name="Breed" Type="Edm.String" isUnique="false"/>
+                <Property Name="PetDisplayImage" Type="Edm.String" isUnique="false"/>
+                <NavigationProperty Name="Owns" Type="Collection(Model.PetOwner)"/>
+                <NavigationProperty Name="Visits" Type="Collection(Model.Visit)"/>
+                <NavigationProperty Name="PetImage" Type="Collection(Model.Image)"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="PetOwner">
+                <Key>
+                    <PropertyRef Name="Pet_ownerId"/>
+                </Key>
+                <Property Name="Pet_ownerId" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="PetOwnername" Type="Edm.String" isUnique="false"/>
+                <Property Name="PetOwnerphone" Type="Edm.Int64" isUnique="false"/>
+                <Property Name="PetOwnerDisplayImage" Type="Edm.String" isUnique="false"/>
+                <NavigationProperty Name="BookAppointmentScheduleVisitVaccine" Type="Collection(Model.Veterian)"/>
+                <NavigationProperty Name="PetOwnerImage" Type="Collection(Model.Image)"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="VisitScheduler">
+                <Key>
+                    <PropertyRef Name="ScheduleVisit_id"/>
+                </Key>
+                <Property Name="ScheduleVisit_id" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="ScheduleVisitfrom" Type="Edm.DateTimeOffset" isUnique="false"/>
+                <Property Name="ScheduleVisitto" Type="Edm.DateTimeOffset" isUnique="false"/>
+                <Property Name="AlertPhonenum" Type="Edm.Int64" isUnique="false"/>
+                <Property Name="VisitRecurrence" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="VisitRecurrenceType" Type="Edm.String" isUnique="false"/>
+                <NavigationProperty Name="PetVisit" Type="Collection(Model.Pet)"/>
+                <NavigationProperty Name="PetVaccineSchedular" Type="Collection(Model.Visit)"/>
+                <NavigationProperty Name="VisitSchedular" Type="Collection(Model.Veterian)"/>
+                <NavigationProperty Name="VetPetVisitSchedular" Type="Collection(Model.PetOwner)"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="Veterian">
+                <Key>
+                    <PropertyRef Name="Vet_id"/>
+                </Key>
+                <Property Name="Vet_id" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="VetName" Type="Edm.String" isUnique="false"/>
+                <Property Name="VetSpecialization" Type="Edm.String" isUnique="false"/>
+                <Property Name="VetPetAnimal" Type="Edm.String" isUnique="false"/>
+                <Property Name="VetDescription" Type="Edm.String" isUnique="false"/>
+                <Property Name="VetInstagramprofiletofollow" Type="Edm.String" isUnique="false"/>
+                <Property Name="VetDisplayImage" Type="Edm.String" isUnique="false"/>
+                <NavigationProperty Name="Examinehealth" Type="Collection(Model.Pet)"/>
+                <NavigationProperty Name="VetImage" Type="Collection(Model.Image)"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="Appointment">
+                <Key>
+                    <PropertyRef Name="AppointmentId"/>
+                </Key>
+                <Property Name="AppointmentId" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="DateOfappointment" Type="Edm.DateTimeOffset" isUnique="false"/>
+                <Property Name="Reasonproblem" Type="Edm.String" isUnique="false"/>
+                <NavigationProperty Name="Petappointment" Type="Collection(Model.Pet)"/>
+                <NavigationProperty Name="AppointmentDetails" Type="Collection(Model.Visit)"/>
+                <NavigationProperty Name="VetPetVaccineSchedular" Type="Collection(Model.Veterian)"/>
+                <NavigationProperty Name="Vetpetappointment" Type="Collection(Model.PetOwner)"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="VaccineScheduler">
+                <Key>
+                    <PropertyRef Name="Vaccine_id"/>
+                </Key>
+                <Property Name="Vaccine_id" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="ScheduleVaccinefrom" Type="Edm.DateTimeOffset" isUnique="false"/>
+                <Property Name="ScheduleVaccineto" Type="Edm.DateTimeOffset" isUnique="false"/>
+                <Property Name="VaccineRecurrence" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="VaccineRecurrenceType" Type="Edm.String" isUnique="false"/>
+                <Property Name="AlertPhonenum" Type="Edm.Int64" isUnique="false"/>
+                <Property Name="UploadPrescription" Type="Edm.String" isUnique="false"/>
+                <NavigationProperty Name="PetVaccine" Type="Collection(Model.Pet)"/>
+                <NavigationProperty Name="VaccineDetails" Type="Collection(Model.Visit)"/>
+                <NavigationProperty Name="VetVaccineSchedular" Type="Collection(Model.Veterian)"/>
+                <NavigationProperty Name="VetPetVaccineSchedularAlert" Type="Collection(Model.PetOwner)"/>
+                <NavigationProperty Name="Prescription" Type="Collection(Model.Image)"/>
+            </EntityType>
+            <EntityType HasStream="true" Name="Image">
+                <Key>
+                    <PropertyRef Name="ImageId"/>
+                </Key>
+                <Property Name="ImageId" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="ImageType" Type="Edm.String" isUnique="false"/>
+                <Property Name="ImageName" Type="Edm.String" isUnique="false"/>
+            </EntityType>
+            <EntityContainer Name="Container">
+                <EntitySet Name="Visits" EntityType="Model.Visit"/>
+                <EntitySet Name="Pets" EntityType="Model.Pet">
+                    <NavigationPropertyBinding Path="Owns" Target="PetOwners"/>
+                    <NavigationPropertyBinding Path="Visits" Target="Visits"/>
+                    <NavigationPropertyBinding Path="PetImage" Target="Images"/>
+                </EntitySet>
+                <EntitySet Name="PetOwners" EntityType="Model.PetOwner">
+                    <NavigationPropertyBinding Path="BookAppointmentScheduleVisitVaccine" Target="Veterians"/>
+                    <NavigationPropertyBinding Path="PetOwnerImage" Target="Images"/>
+                </EntitySet>
+                <EntitySet Name="VisitSchedulers" EntityType="Model.VisitScheduler">
+                    <NavigationPropertyBinding Path="PetVisit" Target="Pets"/>
+                    <NavigationPropertyBinding Path="PetVaccineSchedular" Target="Visits"/>
+                    <NavigationPropertyBinding Path="VisitSchedular" Target="Veterians"/>
+                    <NavigationPropertyBinding Path="VetPetVisitSchedular" Target="PetOwners"/>
+                </EntitySet>
+                <EntitySet Name="Veterians" EntityType="Model.Veterian">
+                    <NavigationPropertyBinding Path="Examinehealth" Target="Pets"/>
+                    <NavigationPropertyBinding Path="VetImage" Target="Images"/>
+                </EntitySet>
+                <EntitySet Name="Appointments" EntityType="Model.Appointment">
+                    <NavigationPropertyBinding Path="Petappointment" Target="Pets"/>
+                    <NavigationPropertyBinding Path="AppointmentDetails" Target="Visits"/>
+                    <NavigationPropertyBinding Path="VetPetVaccineSchedular" Target="Veterians"/>
+                    <NavigationPropertyBinding Path="Vetpetappointment" Target="PetOwners"/>
+                </EntitySet>
+                <EntitySet Name="VaccineSchedulers" EntityType="Model.VaccineScheduler">
+                    <NavigationPropertyBinding Path="PetVaccine" Target="Pets"/>
+                    <NavigationPropertyBinding Path="VaccineDetails" Target="Visits"/>
+                    <NavigationPropertyBinding Path="VetVaccineSchedular" Target="Veterians"/>
+                    <NavigationPropertyBinding Path="VetPetVaccineSchedularAlert" Target="PetOwners"/>
+                    <NavigationPropertyBinding Path="Prescription" Target="Images"/>
+                </EntitySet>
+                <EntitySet Name="Images" EntityType="Model.Image"/>
+            </EntityContainer>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
